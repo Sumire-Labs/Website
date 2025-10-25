@@ -88,7 +88,9 @@ const loadAnnouncements = async () => {
       return new Date(b.date).getTime() - new Date(a.date).getTime()
     })
   } catch (error) {
-    console.error('Failed to load announcements:', error)
+    if (import.meta.env.DEV) {
+      console.error('Failed to load announcements:', error)
+    }
   } finally {
     loading.value = false
   }

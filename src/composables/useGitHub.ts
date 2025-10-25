@@ -35,7 +35,9 @@ export function useGitHub() {
       }
     } catch (err) {
       // If cache fails, continue with fetch
-      console.warn('Failed to load cache:', err)
+      if (import.meta.env.DEV) {
+        console.warn('Failed to load cache:', err)
+      }
     }
 
     loading.value = true
@@ -65,11 +67,15 @@ export function useGitHub() {
         }))
       } catch (err) {
         // If cache storage fails, continue without caching
-        console.warn('Failed to cache data:', err)
+        if (import.meta.env.DEV) {
+          console.warn('Failed to cache data:', err)
+        }
       }
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Unknown error occurred'
-      console.error('Failed to fetch repositories:', err)
+      if (import.meta.env.DEV) {
+        console.error('Failed to fetch repositories:', err)
+      }
     } finally {
       loading.value = false
     }
