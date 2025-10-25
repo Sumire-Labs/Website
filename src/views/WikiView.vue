@@ -51,8 +51,7 @@ const categories = ref<WikiCategory[]>([])
 const categoryDefaults: Record<string, { name: string; icon: string }> = {
   'general': { name: '一般', icon: '📚' },
   'minecraft': { name: 'Minecraft', icon: '🎮' },
-  'gta-v': { name: 'GTA V', icon: '🚗' },
-  'projects': { name: 'Projects', icon: '🔬' }
+  'app': { name: 'アプリ', icon: '📱' }
 }
 
 const toggleSidebar = () => {
