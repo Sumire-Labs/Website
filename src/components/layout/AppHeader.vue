@@ -87,8 +87,17 @@ const socialLinks = [
     <div class="bg-surface-light/70 dark:bg-surface-dark/70 backdrop-blur-xl rounded-full shadow-lg border border-outline-light/20 dark:border-outline-dark/20 px-6 py-3">
       <div class="flex items-center justify-between">
         <!-- ロゴ -->
-        <router-link to="/" class="hover:opacity-80 transition-opacity" @click="forceClose">
-          <img src="/sumire_server_icon.png" alt="すみれさば" class="w-10 h-10 rounded-lg" />
+        <router-link to="/" class="hover:opacity-80 transition-opacity" @click="forceClose" aria-label="ホームページに戻る">
+          <img
+            src="/sumire_server_icon.png"
+            alt="すみれさば ロゴ"
+            width="161"
+            height="170"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="w-10 h-10 rounded-lg"
+          />
         </router-link>
 
         <div class="flex items-center gap-2">
