@@ -1,0 +1,12 @@
+# robots.txt for すみれさば (Sumire Labs)
+# https://sumire-labs.vercel.app
+
+# Allow all crawlers to access all content
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://sumire-labs.vercel.app/sitemap.xml
+
+# Crawl delay (optional, be nice to servers)
+Crawl-delay: 1
