@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, onUnmounted } from 'vue'
 
+// Announcement Display Configuration
+const INITIAL_ANNOUNCEMENT_COUNT = 3
+
+// Scroll Configuration
+const SCROLL_INDICATOR_THRESHOLD = 50 // px - hide indicator after this scroll
+const SCROLL_THROTTLE_DELAY = 100 // ms - throttle scroll events
+
 interface AnnouncementMeta {
   date: string
   title: string
@@ -14,11 +21,11 @@ const showAll = ref(false)
 const showScrollIndicator = ref(true)
 
 const displayedAnnouncements = computed(() => {
-  return showAll.value ? announcements.value : announcements.value.slice(0, 3)
+  return showAll.value ? announcements.value : announcements.value.slice(0, INITIAL_ANNOUNCEMENT_COUNT)
 })
 
 const hasMore = computed(() => {
-  return announcements.value.length > 3
+  return announcements.value.length > INITIAL_ANNOUNCEMENT_COUNT
 })
 
 const loadAnnouncements = async () => {
@@ -105,9 +112,9 @@ const handleScroll = () => {
   if (scrollTimeout) return
 
   scrollTimeout = window.setTimeout(() => {
-    showScrollIndicator.value = window.scrollY <= 50
+    showScrollIndicator.value = window.scrollY <= SCROLL_INDICATOR_THRESHOLD
     scrollTimeout = null
-  }, 100)
+  }, SCROLL_THROTTLE_DELAY)
 }
 
 onMounted(() => {

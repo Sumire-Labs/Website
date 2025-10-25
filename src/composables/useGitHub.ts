@@ -1,10 +1,20 @@
 import { ref } from 'vue'
 import type { Repository } from '@/types'
 
+// API Configuration
 const GITHUB_ORG = 'Sumire-Labs'
 const GITHUB_API_URL = `https://api.github.com/orgs/${GITHUB_ORG}/repos`
+const REPOS_PER_PAGE = 100
+
+// Cache Configuration
 const CACHE_KEY = 'github_repos_cache'
 const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
+
+// Date Format Thresholds
+const DAYS_IN_WEEK = 7
+const DAYS_IN_MONTH = 30
+const DAYS_IN_YEAR = 365
+const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24
 
 export function useGitHub() {
   const repositories = ref<Repository[]>([])
@@ -32,7 +42,7 @@ export function useGitHub() {
     error.value = null
 
     try {
-      const response = await fetch(`${GITHUB_API_URL}?per_page=100&sort=updated`)
+      const response = await fetch(`${GITHUB_API_URL}?per_page=${REPOS_PER_PAGE}&sort=updated`)
 
       if (!response.ok) {
         throw new Error(`GitHub API Error: ${response.status}`)
@@ -69,22 +79,22 @@ export function useGitHub() {
     const date = new Date(dateString)
     const now = new Date()
     const diffTime = Math.abs(now.getTime() - date.getTime())
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+    const diffDays = Math.ceil(diffTime / MILLISECONDS_PER_DAY)
 
     if (diffDays === 0) {
       return '今日'
     } else if (diffDays === 1) {
       return '昨日'
-    } else if (diffDays < 7) {
+    } else if (diffDays < DAYS_IN_WEEK) {
       return `${diffDays}日前`
-    } else if (diffDays < 30) {
-      const weeks = Math.floor(diffDays / 7)
+    } else if (diffDays < DAYS_IN_MONTH) {
+      const weeks = Math.floor(diffDays / DAYS_IN_WEEK)
       return `${weeks}週間前`
-    } else if (diffDays < 365) {
-      const months = Math.floor(diffDays / 30)
+    } else if (diffDays < DAYS_IN_YEAR) {
+      const months = Math.floor(diffDays / DAYS_IN_MONTH)
       return `${months}ヶ月前`
     } else {
-      const years = Math.floor(diffDays / 365)
+      const years = Math.floor(diffDays / DAYS_IN_YEAR)
       return `${years}年前`
     }
   }

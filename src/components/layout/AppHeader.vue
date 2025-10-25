@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import { useTheme } from '@/composables/useTheme'
+
+// Menu Timing Configuration
+const MENU_OPEN_DELAY = 150 // ms - delay before opening menu on hover
+const MENU_CLOSE_DELAY = 200 // ms - delay before closing menu on leave
 
 const { theme, toggleTheme } = useTheme()
 const menuOpen = ref(false)
@@ -15,7 +19,7 @@ const openMenu = () => {
   if (hoverTimer.value) clearTimeout(hoverTimer.value)
   hoverTimer.value = window.setTimeout(() => {
     menuOpen.value = true
-  }, 150)
+  }, MENU_OPEN_DELAY)
 }
 
 const keepMenuOpen = () => {
@@ -35,7 +39,7 @@ const closeMenu = () => {
   // 少し遅延を入れて閉じる（メニューへの移動時間を確保）
   hoverTimer.value = window.setTimeout(() => {
     menuOpen.value = false
-  }, 200)
+  }, MENU_CLOSE_DELAY)
 }
 
 const forceClose = () => {
@@ -46,6 +50,13 @@ const forceClose = () => {
   }
   menuOpen.value = false
 }
+
+// Cleanup timer on unmount to prevent memory leaks
+onUnmounted(() => {
+  if (hoverTimer.value) {
+    clearTimeout(hoverTimer.value)
+  }
+})
 
 const socialLinks = [
   {
