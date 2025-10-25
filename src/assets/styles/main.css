@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply transition-colors duration-200;
+  }
+
+  body {
+    @apply bg-background-light dark:bg-background-dark;
+    @apply text-on-surface-light dark:text-on-surface-dark;
+    @apply font-sans;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Material Design 3 Card */
+  .md3-card {
+    @apply bg-surface-container-light dark:bg-surface-container-dark;
+    @apply rounded-md3-lg shadow-md3-1;
+    @apply hover:shadow-md3-2;
+    @apply transition-all duration-300;
+    @apply border border-outline-light/10 dark:border-outline-dark/10;
+  }
+
+  /* Material Design 3 Button */
+  .md3-button {
+    @apply px-6 py-3 rounded-md3-xl;
+    @apply font-medium text-sm;
+    @apply transition-all duration-200;
+    @apply hover:shadow-md3-2;
+  }
+
+  .md3-button-filled {
+    @apply md3-button;
+    @apply bg-primary-light dark:bg-primary-dark;
+    @apply text-white dark:text-surface-dark;
+    @apply hover:shadow-md3-3;
+    @apply active:scale-95;
+  }
+
+  .md3-button-outlined {
+    @apply md3-button;
+    @apply border-2 border-outline-light dark:border-outline-dark;
+    @apply text-primary-light dark:text-primary-dark;
+    @apply hover:bg-surface-container-light dark:hover:bg-surface-container-dark;
+  }
+
+  /* Material Design 3 FAB */
+  .md3-fab {
+    @apply fixed bottom-8 right-8;
+    @apply w-14 h-14 md:w-16 md:h-16;
+    @apply rounded-md3-lg;
+    @apply bg-primary-light dark:bg-primary-dark;
+    @apply text-white;
+    @apply shadow-md3-3;
+    @apply flex items-center justify-center;
+    @apply hover:shadow-md3-3 hover:scale-110;
+    @apply transition-all duration-300;
+  }
+
+  /* Markdown Content Styling */
+  .markdown-content {
+    @apply prose dark:prose-invert max-w-none;
+  }
+
+  .markdown-content h1 {
+    @apply text-3xl font-bold mb-4 text-primary-light dark:text-primary-dark;
+  }
+
+  .markdown-content h2 {
+    @apply text-2xl font-semibold mb-3 text-primary-light dark:text-primary-dark;
+  }
+
+  .markdown-content h3 {
+    @apply text-xl font-semibold mb-2;
+  }
+
+  .markdown-content p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  .markdown-content ul,
+  .markdown-content ol {
+    @apply mb-4 ml-6;
+  }
+
+  .markdown-content li {
+    @apply mb-2;
+  }
+
+  .markdown-content a {
+    @apply text-primary-light dark:text-primary-dark underline hover:brightness-110;
+  }
+
+  .markdown-content code {
+    @apply bg-surface-light dark:bg-surface-dark px-2 py-1 rounded text-sm;
+  }
+
+  .markdown-content pre {
+    @apply bg-surface-light dark:bg-surface-dark p-4 rounded-md3-sm overflow-x-auto mb-4;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Material Design 3 Spring Animation */
+  .ease-spring {
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
