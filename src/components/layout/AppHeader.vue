@@ -88,16 +88,20 @@ const socialLinks = [
       <div class="flex items-center justify-between">
         <!-- ロゴ -->
         <router-link to="/" class="hover:opacity-80 transition-opacity" @click="forceClose" aria-label="ホームページに戻る">
-          <img
-            src="/sumire_server_icon.png"
-            alt="すみれさば ロゴ"
-            width="161"
-            height="170"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-            class="w-10 h-10 rounded-lg"
-          />
+          <picture>
+            <source srcset="/sumire_icon_40.avif" type="image/avif">
+            <source srcset="/sumire_icon_40.webp" type="image/webp">
+            <img
+              src="/sumire_icon_40.png"
+              alt="すみれさば ロゴ"
+              width="40"
+              height="40"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              class="w-10 h-10 rounded-lg"
+            />
+          </picture>
         </router-link>
 
         <div class="flex items-center gap-2">
