@@ -63,8 +63,8 @@ const loadAnnouncements = async () => {
       return new Date(dateB[1]!).getTime() - new Date(dateA[1]!).getTime()
     })
 
-    // 初期表示分だけ先に読み込み、残りは遅延読み込み
-    const initialLoadCount = showAll.value ? sortedPaths.length : Math.min(INITIAL_ANNOUNCEMENT_COUNT, sortedPaths.length)
+    // 初期表示分だけコンテンツを読み込む
+    const initialLoadCount = Math.min(INITIAL_ANNOUNCEMENT_COUNT, sortedPaths.length)
 
     for (let i = 0; i < initialLoadCount; i++) {
       const path = sortedPaths[i]
@@ -98,6 +98,28 @@ const loadAnnouncements = async () => {
       }
     }
 
+    // 残りはメタデータのみ（コンテンツなし）で追加してhasMoreを正しく機能させる
+    for (let i = initialLoadCount; i < sortedPaths.length; i++) {
+      const path = sortedPaths[i]
+      if (!path) continue
+
+      const filename = path.split('/').pop() || ''
+      const match = filename.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.md$/)
+
+      if (match) {
+        const dateStr = match[1] || ''
+        const titleSlug = match[2] || ''
+        const title = titleSlug.replace(/-/g, ' ')
+
+        loaded.push({
+          date: dateStr,
+          title,
+          path,
+          content: '', // コンテンツは後で読み込む
+        })
+      }
+    }
+
     announcements.value = loaded
   } catch (error) {
     if (import.meta.env.DEV) {
@@ -117,48 +139,22 @@ const loadMoreAnnouncements = async () => {
   try {
     const modules = import.meta.glob('/docs/announcements/*.md', { query: '?raw', import: 'default' })
 
-    // まずファイル名だけから日付を抽出してソート
-    const sortedPaths = Object.keys(modules).sort((a, b) => {
-      const dateA = a.match(/(\d{4}-\d{2}-\d{2})/)
-      const dateB = b.match(/(\d{4}-\d{2}-\d{2})/)
-      if (!dateA || !dateB) return 0
-      return new Date(dateB[1]!).getTime() - new Date(dateA[1]!).getTime()
-    })
+    // コンテンツが空のアイテムを探して読み込む
+    for (let i = INITIAL_ANNOUNCEMENT_COUNT; i < announcements.value.length; i++) {
+      const announcement = announcements.value[i]
+      if (!announcement || announcement.content) continue // 既に読み込み済みならスキップ
 
-    const loaded: AnnouncementMeta[] = [...announcements.value]
-
-    // 既に読み込まれている分以降を読み込む
-    for (let i = INITIAL_ANNOUNCEMENT_COUNT; i < sortedPaths.length; i++) {
-      const path = sortedPaths[i]
-      if (!path) continue
-
-      const module = modules[path]
+      const module = modules[announcement.path]
       if (!module) continue
 
       const content = await module() as string
-      const filename = path.split('/').pop() || ''
+      const titleMatch = content.match(/^#\s+(.+)$/m)
+      const title = (titleMatch && titleMatch[1]) ? titleMatch[1] : announcement.title
 
-      const match = filename.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.md$/)
-
-      if (match) {
-        const dateStr = match[1] || ''
-        const titleSlug = match[2] || ''
-
-        const titleMatch = content.match(/^#\s+(.+)$/m)
-        const title = (titleMatch && titleMatch[1]) ? titleMatch[1] : titleSlug.replace(/-/g, ' ')
-
-        if (dateStr && title) {
-          loaded.push({
-            date: dateStr,
-            title,
-            path,
-            content,
-          })
-        }
-      }
+      // 既存のアイテムを更新
+      announcement.content = content
+      announcement.title = title
     }
-
-    announcements.value = loaded
   } catch (error) {
     if (import.meta.env.DEV) {
       console.error('Failed to load more announcements:', error)
