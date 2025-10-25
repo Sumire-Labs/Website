@@ -4,6 +4,7 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 const HomeView = () => import('@/views/HomeView.vue')
 const LabsView = () => import('@/views/LabsView.vue')
 const WikiView = () => import('@/views/WikiView.vue')
+const NotFoundView = () => import('@/views/NotFoundView.vue')
 
 const routes: RouteRecordRaw[] = [
   {
@@ -28,6 +29,14 @@ const routes: RouteRecordRaw[] = [
     component: WikiView,
     meta: {
       title: 'Wiki - すみれさば',
+    },
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: NotFoundView,
+    meta: {
+      title: '404 - すみれさば',
     },
   },
 ]
