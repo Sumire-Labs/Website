@@ -6,16 +6,16 @@
 
   <!-- Home Page -->
   <url>
-    <loc>https://sumire-labs.vercel.app/</loc>
-    <lastmod>2025-10-25</lastmod>
+    <loc>https://sumiresaba.com/</loc>
+    <lastmod>2025-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Labs Page -->
   <url>
-    <loc>https://sumire-labs.vercel.app/labs</loc>
-    <lastmod>2025-10-25</lastmod>
+    <loc>https://sumiresaba.com/labs</loc>
+    <lastmod>2025-10-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
