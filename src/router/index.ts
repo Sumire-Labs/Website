@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import LabsView from '@/views/LabsView.vue'
+
+// Lazy load route components for better code splitting
+const HomeView = () => import('@/views/HomeView.vue')
+const LabsView = () => import('@/views/LabsView.vue')
 
 const routes: RouteRecordRaw[] = [
   {
