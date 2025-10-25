@@ -38,6 +38,7 @@ const announcements = ref<AnnouncementMeta[]>([])
 const loading = ref(true)
 const showAll = ref(false)
 const showScrollIndicator = ref(true)
+const loadingMore = ref(false)
 
 const displayedAnnouncements = computed(() => {
   return showAll.value ? announcements.value : announcements.value.slice(0, INITIAL_ANNOUNCEMENT_COUNT)
@@ -49,12 +50,26 @@ const hasMore = computed(() => {
 
 const loadAnnouncements = async () => {
   try {
-    // Viteのglobインポートを使用
+    // Viteのglobインポートを使用（遅延読み込み対応）
     const modules = import.meta.glob('/docs/announcements/*.md', { query: '?raw', import: 'default' })
 
     const loaded: AnnouncementMeta[] = []
 
-    for (const path in modules) {
+    // まずファイル名だけから日付を抽出してソート
+    const sortedPaths = Object.keys(modules).sort((a, b) => {
+      const dateA = a.match(/(\d{4}-\d{2}-\d{2})/)
+      const dateB = b.match(/(\d{4}-\d{2}-\d{2})/)
+      if (!dateA || !dateB) return 0
+      return new Date(dateB[1]!).getTime() - new Date(dateA[1]!).getTime()
+    })
+
+    // 初期表示分だけ先に読み込み、残りは遅延読み込み
+    const initialLoadCount = showAll.value ? sortedPaths.length : Math.min(INITIAL_ANNOUNCEMENT_COUNT, sortedPaths.length)
+
+    for (let i = 0; i < initialLoadCount; i++) {
+      const path = sortedPaths[i]
+      if (!path) continue
+
       const module = modules[path]
       if (!module) continue
 
@@ -83,16 +98,73 @@ const loadAnnouncements = async () => {
       }
     }
 
-    // 日付順にソート（新しい順）
-    announcements.value = loaded.sort((a, b) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime()
-    })
+    announcements.value = loaded
   } catch (error) {
     if (import.meta.env.DEV) {
       console.error('Failed to load announcements:', error)
     }
   } finally {
     loading.value = false
+  }
+}
+
+const loadMoreAnnouncements = async () => {
+  if (loadingMore.value) return
+
+  loadingMore.value = true
+  showAll.value = true
+
+  try {
+    const modules = import.meta.glob('/docs/announcements/*.md', { query: '?raw', import: 'default' })
+
+    // まずファイル名だけから日付を抽出してソート
+    const sortedPaths = Object.keys(modules).sort((a, b) => {
+      const dateA = a.match(/(\d{4}-\d{2}-\d{2})/)
+      const dateB = b.match(/(\d{4}-\d{2}-\d{2})/)
+      if (!dateA || !dateB) return 0
+      return new Date(dateB[1]!).getTime() - new Date(dateA[1]!).getTime()
+    })
+
+    const loaded: AnnouncementMeta[] = [...announcements.value]
+
+    // 既に読み込まれている分以降を読み込む
+    for (let i = INITIAL_ANNOUNCEMENT_COUNT; i < sortedPaths.length; i++) {
+      const path = sortedPaths[i]
+      if (!path) continue
+
+      const module = modules[path]
+      if (!module) continue
+
+      const content = await module() as string
+      const filename = path.split('/').pop() || ''
+
+      const match = filename.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.md$/)
+
+      if (match) {
+        const dateStr = match[1] || ''
+        const titleSlug = match[2] || ''
+
+        const titleMatch = content.match(/^#\s+(.+)$/m)
+        const title = (titleMatch && titleMatch[1]) ? titleMatch[1] : titleSlug.replace(/-/g, ' ')
+
+        if (dateStr && title) {
+          loaded.push({
+            date: dateStr,
+            title,
+            path,
+            content,
+          })
+        }
+      }
+    }
+
+    announcements.value = loaded
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.error('Failed to load more announcements:', error)
+    }
+  } finally {
+    loadingMore.value = false
   }
 }
 
@@ -206,10 +278,11 @@ onUnmounted(() => {
           <!-- もっと見るボタン -->
           <div v-if="hasMore && !showAll" class="text-center pt-6">
             <button
-              @click="showAll = true"
-              class="md3-button-outlined"
+              @click="loadMoreAnnouncements"
+              :disabled="loadingMore"
+              class="md3-button-outlined disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              もっと見る
+              {{ loadingMore ? '読み込み中...' : 'もっと見る' }}
             </button>
           </div>
         </div>
