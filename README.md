@@ -1,37 +1,6 @@
-# すみれさば Discord - 公式ホームページ
+# すみれさばホームページ
 
-ゲームから開発まで、多彩なコミュニティを提供するDiscordサーバー「すみれさば」の公式ホームページです。
-
-## 🚀 技術スタック
-
-- **Vue.js 3.5.22** - Progressive JavaScript Framework
-- **TypeScript** - 型安全な開発
-- **Vite** - 次世代フロントエンドツール
-- **Vue Router 4** - 公式ルーティングライブラリ
-- **Tailwind CSS 4** - ユーティリティファーストCSS
-- **Material Design 3 Expressive** - デザインシステム
-- **VueUse** - Vue Composition API ユーティリティ
-- **unplugin-vue-markdown** - Markdown統合
-
-## ✨ 機能
-
-### Home タブ
-- 美しいヒーローセクション
-- Discordサーバー参加ボタン
-- お知らせセクション（Markdown形式）
-- 新しい順に自動ソート
-
-### Labs タブ
-- GitHub APIによるリポジトリ一覧表示
-- リアルタイム検索機能
-- 更新日時順ソート
-- スター数、言語、ライセンス表示
-
-### 共通機能
-- ダークモード / ライトモード切り替え
-- レスポンシブデザイン（モバイル対応）
-- ハンバーガーメニューによる統合ナビゲーション
-- Material Design 3準拠のUI/UX
+Discordサーバー「すみれさば」の公式ホームページです。
 
 ## 📦 セットアップ
 
