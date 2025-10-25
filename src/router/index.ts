@@ -3,6 +3,7 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 // Lazy load route components for better code splitting
 const HomeView = () => import('@/views/HomeView.vue')
 const LabsView = () => import('@/views/LabsView.vue')
+const WikiView = () => import('@/views/WikiView.vue')
 
 const routes: RouteRecordRaw[] = [
   {
@@ -19,6 +20,14 @@ const routes: RouteRecordRaw[] = [
     component: LabsView,
     meta: {
       title: 'Labs - すみれさば',
+    },
+  },
+  {
+    path: '/wiki/:category?/:page?',
+    name: 'wiki',
+    component: WikiView,
+    meta: {
+      title: 'Wiki - すみれさば',
     },
   },
 ]
