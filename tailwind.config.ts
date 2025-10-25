@@ -48,7 +48,21 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Roboto', 'Noto Sans JP', 'sans-serif'],
+        sans: [
+          // System fonts for maximum performance
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          // Japanese system fonts
+          'Hiragino Sans',
+          'Hiragino Kaku Gothic ProN',
+          'Yu Gothic',
+          'Meiryo',
+          'sans-serif',
+        ],
       },
       boxShadow: {
         'md3-1': '0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15)',
