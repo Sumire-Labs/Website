@@ -107,7 +107,7 @@ onMounted(() => {
             </h3>
             <p class="text-red-600 dark:text-red-400 mb-6">{{ error }}</p>
             <button
-              @click="loadRepositories"
+              @click="fetchRepositories"
               class="md3-button-filled"
             >
               <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
