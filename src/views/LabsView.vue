@@ -64,7 +64,7 @@ onMounted(() => {
 
     <!-- リポジトリセクション -->
     <section class="py-12 md:py-16">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 max-w-[1400px]">
+      <div class="w-full px-4 sm:px-6 lg:px-12 xl:px-16">
         <!-- 検索バー -->
         <div class="mb-8">
           <div class="relative max-w-2xl mx-auto">

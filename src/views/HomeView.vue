@@ -245,7 +245,7 @@ onUnmounted(() => {
 
     <!-- お知らせセクション -->
     <section class="py-16 md:py-24 border-t border-outline-light/20 dark:border-outline-dark/20">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 max-w-7xl">
+      <div class="w-full px-4 sm:px-6 lg:px-12 xl:px-16">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-light dark:text-primary-dark">
           📢 お知らせ
         </h2>

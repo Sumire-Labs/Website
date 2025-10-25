@@ -200,7 +200,7 @@ onMounted(async () => {
 
 <template>
   <div class="min-h-screen bg-background-light dark:bg-background-dark pt-24 pb-12">
-    <div class="container mx-auto px-4 max-w-7xl">
+    <div class="w-full px-4 lg:px-8 xl:px-12">
       <div class="flex gap-6">
         <!-- Mobile Sidebar Toggle -->
         <button

@@ -83,7 +83,7 @@ const socialLinks = [
 </script>
 
 <template>
-  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
+  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[calc(100%-2rem)] lg:max-w-[calc(100%-4rem)] xl:max-w-[calc(100%-6rem)]">
     <div class="bg-surface-light/70 dark:bg-surface-dark/70 backdrop-blur-xl rounded-full shadow-lg border border-outline-light/20 dark:border-outline-dark/20 px-6 py-3">
       <div class="flex items-center justify-between">
         <!-- ロゴ -->
