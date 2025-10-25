@@ -18,11 +18,31 @@ export default defineConfig({
     }),
   ],
   build: {
+    // Enable CSS code splitting
+    cssCodeSplit: true,
+    // Minify options
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.logs in production
+        drop_debugger: true, // Remove debuggers
+        pure_funcs: ['console.log', 'console.info', 'console.debug'], // Remove specific console methods
+      },
+      format: {
+        comments: false, // Remove all comments
+      },
+    },
+    // CSS minification
+    cssMinify: 'lightningcss',
     rollupOptions: {
       output: {
         manualChunks: {
           'vue-vendor': ['vue', 'vue-router'],
         },
+        // Optimize chunk file names
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
       },
     },
   },
