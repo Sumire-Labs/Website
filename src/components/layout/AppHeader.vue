@@ -152,7 +152,7 @@ const socialLinks = [
         v-if="menuOpen"
         @mouseenter="keepMenuOpen"
         @mouseleave="closeMenu"
-        class="absolute top-20 right-4 w-72 origin-top-right bg-surface-container-light dark:bg-surface-container-dark backdrop-blur-md rounded-2xl shadow-md3-3 border border-outline-light/20 dark:border-outline-dark/20"
+        class="absolute top-20 right-4 w-72 origin-top-right bg-surface-light/70 dark:bg-surface-dark/70 backdrop-blur-xl rounded-2xl shadow-md3-3 border border-outline-light/20 dark:border-outline-dark/20"
       >
         <nav class="p-4">
           <!-- ナビゲーションリンク -->
