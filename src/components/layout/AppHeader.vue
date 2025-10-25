@@ -117,10 +117,10 @@ const socialLinks = [
 
     <!-- ハンバーガーメニュー（ポップアップスタイル） -->
     <transition
-      enter-active-class="transition-all duration-300 ease-spring"
+      enter-active-class="transition-[opacity,transform] duration-300 ease-spring"
       enter-from-class="opacity-0 scale-95 -translate-y-2"
       enter-to-class="opacity-100 scale-100 translate-y-0"
-      leave-active-class="transition-all duration-200 ease-in"
+      leave-active-class="transition-[opacity,transform] duration-200 ease-in"
       leave-from-class="opacity-100 scale-100 translate-y-0"
       leave-to-class="opacity-0 scale-95 -translate-y-2"
     >
@@ -136,7 +136,7 @@ const socialLinks = [
             <router-link
               to="/"
               @click="forceClose"
-              class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-all text-on-surface-light dark:text-on-surface-dark font-medium text-sm"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color,color] text-on-surface-light dark:text-on-surface-dark font-medium text-sm"
               active-class="bg-surface-container-high-light dark:bg-surface-container-high-dark text-primary-light dark:text-primary-dark"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,7 +147,7 @@ const socialLinks = [
             <router-link
               to="/labs"
               @click="forceClose"
-              class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-all text-on-surface-light dark:text-on-surface-dark font-medium text-sm"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color,color] text-on-surface-light dark:text-on-surface-dark font-medium text-sm"
               active-class="bg-surface-container-high-light dark:bg-surface-container-high-dark text-primary-light dark:text-primary-dark"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,7 +160,7 @@ const socialLinks = [
           <hr class="border-outline-light/20 dark:border-outline-dark/20 my-3" />
 
           <!-- テーマ切り替え（トグルスイッチ） -->
-          <div class="px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-all">
+          <div class="px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color]">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <svg class="w-5 h-5 text-on-surface-light dark:text-on-surface-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -194,7 +194,7 @@ const socialLinks = [
               target="_blank"
               rel="noopener noreferrer"
               :title="link.name"
-              class="p-2 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-all group"
+              class="p-2 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color] group"
             >
               <span class="text-on-surface-variant-light dark:text-on-surface-variant-dark group-hover:text-primary-light dark:group-hover:text-primary-dark transition-colors w-5 h-5 flex items-center justify-center" v-html="link.svg"></span>
             </a>

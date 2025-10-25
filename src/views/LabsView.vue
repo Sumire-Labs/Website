@@ -106,7 +106,7 @@ onMounted(() => {
           <article
             v-for="repo in filteredRepositories"
             :key="repo.id"
-            class="group relative bg-surface-container-light dark:bg-surface-container-dark rounded-3xl shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-outline-light/10 dark:border-outline-dark/10"
+            class="group relative bg-surface-container-light dark:bg-surface-container-dark rounded-3xl shadow-md hover:shadow-2xl transition-[transform,shadow] duration-300 hover:-translate-y-2 border border-outline-light/10 dark:border-outline-dark/10"
           >
             <div class="p-6 flex flex-col h-full">
               <!-- リポジトリ名と説明 -->
