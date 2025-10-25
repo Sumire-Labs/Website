@@ -45,36 +45,15 @@ const loading = ref(true)
 const currentContent = ref('')
 const currentPage = ref<WikiPage | null>(null)
 
-const categories = ref<WikiCategory[]>([
-  {
-    id: 'general',
-    name: '一般',
-    icon: '📚',
-    collapsed: false,
-    pages: []
-  },
-  {
-    id: 'minecraft',
-    name: 'Minecraft',
-    icon: '🎮',
-    collapsed: false,
-    pages: []
-  },
-  {
-    id: 'gta-v',
-    name: 'GTA V',
-    icon: '🚗',
-    collapsed: false,
-    pages: []
-  },
-  {
-    id: 'projects',
-    name: 'Projects',
-    icon: '🔬',
-    collapsed: false,
-    pages: []
-  }
-])
+const categories = ref<WikiCategory[]>([])
+
+// Default category metadata (can be overridden by detection)
+const categoryDefaults: Record<string, { name: string; icon: string }> = {
+  'general': { name: '一般', icon: '📚' },
+  'minecraft': { name: 'Minecraft', icon: '🎮' },
+  'gta-v': { name: 'GTA V', icon: '🚗' },
+  'projects': { name: 'Projects', icon: '🔬' }
+}
 
 const toggleSidebar = () => {
   sidebarOpen.value = !sidebarOpen.value
@@ -90,6 +69,7 @@ const toggleCategory = (categoryId: string) => {
 const loadWikiStructure = async () => {
   try {
     const modules = import.meta.glob('/docs/wiki/**/*.md', { query: '?raw', import: 'default' })
+    const detectedCategories = new Map<string, WikiCategory>()
 
     for (const path in modules) {
       const parts = path.split('/')
@@ -98,7 +78,26 @@ const loadWikiStructure = async () => {
 
       if (!categoryId || !filename) continue
 
-      const category = categories.value.find(c => c.id === categoryId)
+      // Auto-create category if it doesn't exist
+      if (!detectedCategories.has(categoryId)) {
+        const defaultMeta = categoryDefaults[categoryId]
+
+        // Generate display name from folder name if no default exists
+        const displayName = defaultMeta?.name || categoryId
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ')
+
+        detectedCategories.set(categoryId, {
+          id: categoryId,
+          name: displayName,
+          icon: defaultMeta?.icon || '📁', // Default folder icon
+          collapsed: false,
+          pages: []
+        })
+      }
+
+      const category = detectedCategories.get(categoryId)
       if (!category) continue
 
       // Load content to extract title
@@ -116,6 +115,14 @@ const loadWikiStructure = async () => {
         category: categoryId
       })
     }
+
+    // Convert map to array and sort categories
+    categories.value = Array.from(detectedCategories.values()).sort((a, b) => {
+      // Prioritize 'general' category first
+      if (a.id === 'general') return -1
+      if (b.id === 'general') return 1
+      return a.name.localeCompare(b.name)
+    })
 
     // Sort pages alphabetically within each category
     categories.value.forEach(category => {
