@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, onUnmounted } from 'vue'
+import MarkdownIt from 'markdown-it'
 
 // Announcement Display Configuration
 const INITIAL_ANNOUNCEMENT_COUNT = 3
@@ -7,6 +8,24 @@ const INITIAL_ANNOUNCEMENT_COUNT = 3
 // Scroll Configuration
 const SCROLL_INDICATOR_THRESHOLD = 50 // px - hide indicator after this scroll
 const SCROLL_THROTTLE_DELAY = 100 // ms - throttle scroll events
+
+// Initialize markdown parser with security settings
+const md = new MarkdownIt({
+  html: false,        // Disable HTML tags in source for XSS protection
+  linkify: true,      // Auto-convert URLs to links
+  typographer: true,  // Enable smart quotes and other typographic replacements
+  breaks: false       // Don't convert \n to <br>
+})
+
+// Add target="_blank" and rel="noopener noreferrer" to all links for security
+md.renderer.rules.link_open = (tokens, idx, options, _env, self) => {
+  const token = tokens[idx]
+  if (token) {
+    token.attrSet('target', '_blank')
+    token.attrSet('rel', 'noopener noreferrer')
+  }
+  return self.renderToken(tokens, idx, options)
+}
 
 interface AnnouncementMeta {
   date: string
@@ -83,27 +102,9 @@ const formatDate = (dateStr: string): string => {
   return `${year}年${month}月${day}日`
 }
 
-// Markdownを簡易的にHTMLに変換する関数
-const parseMarkdown = (md: string): string => {
-  let html = md
-
-  // h1
-  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>')
-  // h2
-  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>')
-  // h3
-  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>')
-  // bold
-  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-  // links
-  html = html.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-  // paragraphs
-  html = html.replace(/^(?!<[h|u|o]|<strong|<a)(.+)$/gm, '<p>$1</p>')
-  // ul
-  html = html.replace(/^- (.+)$/gm, '<li>$1</li>')
-  html = html.replace(/(<li>.+<\/li>)/s, '<ul>$1</ul>')
-
-  return html
+// Safely parse markdown to HTML with XSS protection
+const parseMarkdown = (markdown: string): string => {
+  return md.render(markdown)
 }
 
 // Throttled scroll handler for better performance
