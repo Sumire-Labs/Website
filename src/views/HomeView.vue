@@ -99,21 +99,27 @@ const parseMarkdown = (md: string): string => {
   return html
 }
 
+// Throttled scroll handler for better performance
+let scrollTimeout: number | null = null
 const handleScroll = () => {
-  if (window.scrollY > 50) {
-    showScrollIndicator.value = false
-  } else {
-    showScrollIndicator.value = true
-  }
+  if (scrollTimeout) return
+
+  scrollTimeout = window.setTimeout(() => {
+    showScrollIndicator.value = window.scrollY <= 50
+    scrollTimeout = null
+  }, 100)
 }
 
 onMounted(() => {
   loadAnnouncements()
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleScroll, { passive: true })
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  if (scrollTimeout) {
+    clearTimeout(scrollTimeout)
+  }
 })
 </script>
 
