@@ -3,6 +3,24 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Default color values - can be overridden by dynamic color system */
+    --dynamic-primary-light: #5865F2;
+    --dynamic-secondary-light: #8B5CF6;
+
+    /* Smooth color transitions */
+    transition: --dynamic-primary-light 1000ms ease-in-out,
+                --dynamic-secondary-light 1000ms ease-in-out;
+  }
+
+  @supports not (transition: --dynamic-primary-light 1s) {
+    /* Fallback for browsers that don't support CSS custom property transitions */
+    :root {
+      --dynamic-primary-light: #5865F2;
+      --dynamic-secondary-light: #8B5CF6;
+    }
+  }
+
   * {
     @apply transition-colors duration-200;
   }

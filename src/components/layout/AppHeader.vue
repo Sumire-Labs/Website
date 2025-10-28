@@ -6,7 +6,7 @@ import { useTheme } from '@/composables/useTheme'
 const MENU_OPEN_DELAY = 150 // ms - delay before opening menu on hover
 const MENU_CLOSE_DELAY = 200 // ms - delay before closing menu on leave
 
-const { theme, toggleTheme } = useTheme()
+const { theme, toggleTheme, dynamicColor } = useTheme()
 const menuOpen = ref(false)
 const hoverTimer = ref<number | null>(null)
 
@@ -194,6 +194,32 @@ const socialLinks = [
               </svg>
               Wiki
             </router-link>
+          </div>
+
+          <hr class="border-outline-light/20 dark:border-outline-dark/20 my-3" />
+
+          <!-- ダイナミックカラー切り替え -->
+          <div class="px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color]">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-on-surface-light dark:text-on-surface-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                </svg>
+                <span class="text-on-surface-light dark:text-on-surface-dark font-medium text-sm">
+                  時刻で色変更
+                </span>
+              </div>
+              <button
+                @click="dynamicColor.toggleDynamicColor"
+                class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:ring-offset-2"
+                :class="dynamicColor.dynamicColorEnabled.value ? 'bg-primary-dark' : 'bg-gray-300'"
+              >
+                <span
+                  class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
+                  :class="dynamicColor.dynamicColorEnabled.value ? 'translate-x-6' : 'translate-x-1'"
+                />
+              </button>
+            </div>
           </div>
 
           <hr class="border-outline-light/20 dark:border-outline-dark/20 my-3" />

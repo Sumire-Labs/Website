@@ -1,11 +1,14 @@
 import { ref, watch, onMounted } from 'vue'
 import type { Theme } from '@/types'
+import { useDynamicColor } from './useDynamicColor'
 
 const THEME_KEY = 'sumire-theme'
 
 const theme = ref<Theme>('light')
 
 export function useTheme() {
+  const dynamicColor = useDynamicColor()
+
   const toggleTheme = () => {
     theme.value = theme.value === 'light' ? 'dark' : 'light'
   }
@@ -27,6 +30,8 @@ export function useTheme() {
     }
 
     applyTheme()
+    // Initialize dynamic color system
+    dynamicColor.initDynamicColor()
   }
 
   const applyTheme = () => {
@@ -53,5 +58,6 @@ export function useTheme() {
     toggleTheme,
     setTheme,
     initTheme,
+    dynamicColor,
   }
 }
