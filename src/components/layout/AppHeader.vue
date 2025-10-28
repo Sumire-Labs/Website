@@ -97,8 +97,11 @@ const socialLinks = [
 <template>
   <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[calc(100%-2rem)] lg:max-w-[calc(100%-4rem)] xl:max-w-[calc(100%-6rem)] transition-all duration-300">
     <div
-      class="bg-surface-light/70 dark:bg-surface-dark/70 backdrop-blur-xl rounded-full border border-outline-light/20 dark:border-outline-dark/20 px-6 py-3 transition-all duration-300"
-      :class="isScrolled ? 'shadow-md3-3' : 'shadow-lg'"
+      class="rounded-full border border-outline-light/20 dark:border-outline-dark/20 px-6 py-3 transition-all duration-300"
+      :class="[
+        isScrolled ? 'shadow-md3-3 bg-surface-light/90 dark:bg-surface-dark/90' : 'shadow-lg bg-surface-light/70 dark:bg-surface-dark/70'
+      ]"
+      style="backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);"
     >
       <div class="flex items-center justify-between">
         <!-- ロゴ -->
@@ -168,7 +171,8 @@ const socialLinks = [
         v-if="menuOpen"
         @mouseenter="keepMenuOpen"
         @mouseleave="closeMenu"
-        class="absolute top-20 right-4 w-72 origin-top-right bg-surface-light/70 dark:bg-surface-dark/70 backdrop-blur-xl rounded-2xl shadow-md3-3 border border-outline-light/20 dark:border-outline-dark/20"
+        class="absolute top-20 right-4 w-72 origin-top-right bg-surface-light/85 dark:bg-surface-dark/85 rounded-2xl shadow-md3-3 border border-outline-light/20 dark:border-outline-dark/20"
+        style="backdrop-filter: blur(24px) saturate(200%); -webkit-backdrop-filter: blur(24px) saturate(200%);"
       >
         <nav class="p-4">
           <!-- ナビゲーションリンク -->
