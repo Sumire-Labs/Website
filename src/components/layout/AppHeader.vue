@@ -217,53 +217,54 @@ const socialLinks = [
 
           <hr class="border-outline-light/20 dark:border-outline-dark/20 my-3" />
 
-          <!-- ダイナミックカラー切り替え -->
-          <div class="px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color]">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <svg class="w-5 h-5 text-on-surface-light dark:text-on-surface-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                </svg>
-                <span class="text-on-surface-light dark:text-on-surface-dark font-medium text-sm">
-                  時刻で色変更
-                </span>
+          <!-- テーマ設定セクション -->
+          <div class="flex flex-col space-y-1">
+            <!-- ダイナミックカラー切り替え -->
+            <div class="px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color]">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-on-surface-light dark:text-on-surface-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                  </svg>
+                  <span class="text-on-surface-light dark:text-on-surface-dark font-medium text-sm">
+                    時刻で色変更
+                  </span>
+                </div>
+                <button
+                  @click="dynamicColor.toggleDynamicColor"
+                  class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:ring-offset-2"
+                  :class="dynamicColor.dynamicColorEnabled.value ? 'bg-primary-dark' : 'bg-gray-300'"
+                >
+                  <span
+                    class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
+                    :class="dynamicColor.dynamicColorEnabled.value ? 'translate-x-6' : 'translate-x-1'"
+                  />
+                </button>
               </div>
-              <button
-                @click="dynamicColor.toggleDynamicColor"
-                class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:ring-offset-2"
-                :class="dynamicColor.dynamicColorEnabled.value ? 'bg-primary-dark' : 'bg-gray-300'"
-              >
-                <span
-                  class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
-                  :class="dynamicColor.dynamicColorEnabled.value ? 'translate-x-6' : 'translate-x-1'"
-                />
-              </button>
             </div>
-          </div>
 
-          <hr class="border-outline-light/20 dark:border-outline-dark/20 my-3" />
-
-          <!-- テーマ切り替え（トグルスイッチ） -->
-          <div class="px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color]">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <svg class="w-5 h-5 text-on-surface-light dark:text-on-surface-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-                <span class="text-on-surface-light dark:text-on-surface-dark font-medium text-sm">
-                  {{ theme === 'dark' ? 'ダークモード' : 'ライトモード' }}
-                </span>
+            <!-- テーマ切り替え（トグルスイッチ） -->
+            <div class="px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color]">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-on-surface-light dark:text-on-surface-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                  <span class="text-on-surface-light dark:text-on-surface-dark font-medium text-sm">
+                    {{ theme === 'dark' ? 'ダークモード' : 'ライトモード' }}
+                  </span>
+                </div>
+                <button
+                  @click="toggleTheme"
+                  class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:ring-offset-2"
+                  :class="theme === 'dark' ? 'bg-primary-dark' : 'bg-gray-300'"
+                >
+                  <span
+                    class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
+                    :class="theme === 'dark' ? 'translate-x-6' : 'translate-x-1'"
+                  />
+                </button>
               </div>
-              <button
-                @click="toggleTheme"
-                class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:ring-offset-2"
-                :class="theme === 'dark' ? 'bg-primary-dark' : 'bg-gray-300'"
-              >
-                <span
-                  class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
-                  :class="theme === 'dark' ? 'translate-x-6' : 'translate-x-1'"
-                />
-              </button>
             </div>
           </div>
 
