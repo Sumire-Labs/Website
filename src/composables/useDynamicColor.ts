@@ -3,7 +3,7 @@
  * Adjusts theme colors based on time of day and user preferences
  */
 
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 
 export type TimeOfDay = 'morning' | 'afternoon' | 'evening' | 'night'
 
