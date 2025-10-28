@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, onUnmounted } from 'vue'
 import MarkdownIt from 'markdown-it'
+import SkeletonCard from '@/components/ui/SkeletonCard.vue'
 
 // Announcement Display Configuration
 const INITIAL_ANNOUNCEMENT_COUNT = 3
@@ -251,10 +252,9 @@ onUnmounted(() => {
           📢 お知らせ
         </h2>
 
-        <!-- ローディング -->
-        <div v-if="loading" class="text-center py-12">
-          <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-primary-light dark:border-primary-dark border-t-transparent"></div>
-          <p class="mt-4 text-gray-600 dark:text-gray-400">読み込み中...</p>
+        <!-- ローディング - Skeleton cards -->
+        <div v-if="loading" class="space-y-6">
+          <SkeletonCard v-for="i in 3" :key="`skeleton-${i}`" />
         </div>
 
         <!-- お知らせ一覧 -->
