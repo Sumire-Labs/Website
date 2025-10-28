@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useTheme } from '@/composables/useTheme'
 
 // Menu Timing Configuration
@@ -9,6 +9,7 @@ const MENU_CLOSE_DELAY = 200 // ms - delay before closing menu on leave
 const { theme, toggleTheme, dynamicColor } = useTheme()
 const menuOpen = ref(false)
 const hoverTimer = ref<number | null>(null)
+const isScrolled = ref(false)
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
@@ -51,11 +52,22 @@ const forceClose = () => {
   menuOpen.value = false
 }
 
+// Handle scroll for header elevation
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 50
+}
+
+// Add scroll listener on mount
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true })
+})
+
 // Cleanup timer on unmount to prevent memory leaks
 onUnmounted(() => {
   if (hoverTimer.value) {
     clearTimeout(hoverTimer.value)
   }
+  window.removeEventListener('scroll', handleScroll)
 })
 
 const socialLinks = [
@@ -83,8 +95,11 @@ const socialLinks = [
 </script>
 
 <template>
-  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[calc(100%-2rem)] lg:max-w-[calc(100%-4rem)] xl:max-w-[calc(100%-6rem)]">
-    <div class="bg-surface-light/70 dark:bg-surface-dark/70 backdrop-blur-xl rounded-full shadow-lg border border-outline-light/20 dark:border-outline-dark/20 px-6 py-3">
+  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[calc(100%-2rem)] lg:max-w-[calc(100%-4rem)] xl:max-w-[calc(100%-6rem)] transition-all duration-300">
+    <div
+      class="bg-surface-light/70 dark:bg-surface-dark/70 backdrop-blur-xl rounded-full border border-outline-light/20 dark:border-outline-dark/20 px-6 py-3 transition-all duration-300"
+      :class="isScrolled ? 'shadow-md3-3' : 'shadow-lg'"
+    >
       <div class="flex items-center justify-between">
         <!-- ロゴ -->
         <router-link to="/" class="hover:opacity-80 transition-opacity" @click="forceClose" aria-label="ホームページに戻る">

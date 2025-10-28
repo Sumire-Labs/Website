@@ -41,9 +41,16 @@
   .md3-card {
     @apply bg-surface-container-light dark:bg-surface-container-dark;
     @apply rounded-md3-lg shadow-md3-1;
-    @apply hover:shadow-md3-2;
+    @apply hover:shadow-md3-3;
     @apply transition-all duration-300;
     @apply border border-outline-light/10 dark:border-outline-dark/10;
+    @apply hover:-translate-y-1;
+    @apply cursor-pointer;
+  }
+
+  .md3-card:active {
+    @apply scale-[0.98];
+    @apply shadow-md3-1;
   }
 
   /* Material Design 3 Button */
@@ -52,6 +59,8 @@
     @apply font-medium text-sm;
     @apply transition-all duration-200;
     @apply hover:shadow-md3-2;
+    @apply hover:scale-105;
+    @apply active:scale-95;
   }
 
   .md3-button-filled {
@@ -59,7 +68,7 @@
     @apply bg-primary-light dark:bg-primary-dark;
     @apply text-white dark:text-surface-dark;
     @apply hover:shadow-md3-3;
-    @apply active:scale-95;
+    @apply hover:brightness-110;
   }
 
   .md3-button-outlined {
@@ -67,6 +76,7 @@
     @apply border-2 border-outline-light dark:border-outline-dark;
     @apply text-primary-light dark:text-primary-dark;
     @apply hover:bg-surface-container-light dark:hover:bg-surface-container-dark;
+    @apply hover:border-primary-light dark:hover:border-primary-dark;
   }
 
   /* Material Design 3 FAB */
