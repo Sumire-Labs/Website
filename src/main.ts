@@ -2,8 +2,12 @@ import { createApp } from 'vue'
 import '@/assets/styles/main.css'
 import App from './App.vue'
 import router from './router'
+import { rippleDirective } from './directives/ripple'
 
 const app = createApp(App)
+
+// Register global directives
+app.directive('ripple', rippleDirective)
 
 // Global Error Handler
 app.config.errorHandler = (err, instance, info) => {

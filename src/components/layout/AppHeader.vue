@@ -110,7 +110,8 @@ const socialLinks = [
             @click="toggleMenu"
             @mouseenter="openMenu"
             @mouseleave="closeMenu"
-            class="p-2 rounded-lg hover:bg-surface-container-light dark:hover:bg-surface-container-dark transition-colors"
+            v-ripple
+            class="p-2 rounded-lg hover:bg-surface-container-light dark:hover:bg-surface-container-dark transition-colors active:scale-95"
             aria-label="メニュー"
           >
             <svg
@@ -160,7 +161,8 @@ const socialLinks = [
             <router-link
               to="/"
               @click="forceClose"
-              class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color,color] text-on-surface-light dark:text-on-surface-dark font-medium text-sm"
+              v-ripple
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color,color] text-on-surface-light dark:text-on-surface-dark font-medium text-sm active:scale-95"
               active-class="bg-surface-container-high-light dark:bg-surface-container-high-dark text-primary-light dark:text-primary-dark"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,7 +173,8 @@ const socialLinks = [
             <router-link
               to="/labs"
               @click="forceClose"
-              class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color,color] text-on-surface-light dark:text-on-surface-dark font-medium text-sm"
+              v-ripple
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color,color] text-on-surface-light dark:text-on-surface-dark font-medium text-sm active:scale-95"
               active-class="bg-surface-container-high-light dark:bg-surface-container-high-dark text-primary-light dark:text-primary-dark"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -182,7 +185,8 @@ const socialLinks = [
             <router-link
               to="/wiki"
               @click="forceClose"
-              class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color,color] text-on-surface-light dark:text-on-surface-dark font-medium text-sm"
+              v-ripple
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark transition-[background-color,color] text-on-surface-light dark:text-on-surface-dark font-medium text-sm active:scale-95"
               active-class="bg-surface-container-high-light dark:bg-surface-container-high-dark text-primary-light dark:text-primary-dark"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
