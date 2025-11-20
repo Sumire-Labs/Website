@@ -3,6 +3,7 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 // Lazy load route components for better code splitting
 const HomeView = () => import('@/views/HomeView.vue')
 const LabsView = () => import('@/views/LabsView.vue')
+const ReleaseView = () => import('@/views/ReleaseView.vue')
 const WikiView = () => import('@/views/WikiView.vue')
 const NotFoundView = () => import('@/views/NotFoundView.vue')
 
@@ -21,6 +22,14 @@ const routes: RouteRecordRaw[] = [
     component: LabsView,
     meta: {
       title: 'Labs - すみれさば',
+    },
+  },
+  {
+    path: '/release',
+    name: 'release',
+    component: ReleaseView,
+    meta: {
+      title: 'Releases - すみれさば',
     },
   },
   {
