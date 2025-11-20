@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-type Category = 'All' | 'Software' | 'Minecraft Mod' | 'Modpack'
+type Category = 'All' | 'Soft' | 'Mod' | 'ModPack'
 
 interface Release {
   id: string
@@ -19,7 +19,7 @@ interface Release {
 const activeCategory = ref<Category>('All')
 const searchQuery = ref('')
 
-const categories: Category[] = ['All', 'Software', 'Minecraft Mod', 'Modpack']
+const categories: Category[] = ['All', 'Soft', 'Mod', 'ModPack']
 
 // Mock Data - Replace with actual data later
 const releases: Release[] = [
@@ -29,7 +29,7 @@ const releases: Release[] = [
     description: 'A Minecraft mod that adds new features to the game. Enhanced gameplay mechanics and new items.',
     version: 'v1.0.0',
     date: '2025-01-20',
-    category: 'Minecraft Mod',
+    category: 'Mod',
     tags: ['Fabric', '1.20.1'],
     downloadUrl: '#',
     githubUrl: '#'
