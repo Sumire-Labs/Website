@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-type Category = 'All' | 'Soft' | 'Mod' | 'ModPack'
+type Category = 'All' | 'App' | 'Mod' | 'ModPack'
 
 interface Release {
   id: string
@@ -19,7 +19,7 @@ interface Release {
 const activeCategory = ref<Category>('All')
 const searchQuery = ref('')
 
-const categories: Category[] = ['All', 'Soft', 'Mod', 'ModPack']
+const categories: Category[] = ['All', 'App', 'Mod', 'ModPack']
 
 // Mock Data - Replace with actual data later
 const releases: Release[] = [
