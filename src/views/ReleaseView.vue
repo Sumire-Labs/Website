@@ -21,18 +21,39 @@ const searchQuery = ref('')
 
 const categories: Category[] = ['All', 'App', 'Mod', 'ModPack']
 
-// Mock Data - Replace with actual data later
 const releases: Release[] = [
   {
     id: '1',
-    title: 'Example Mod',
-    description: 'A Minecraft mod that adds new features to the game. Enhanced gameplay mechanics and new items.',
-    version: 'v1.0.0',
-    date: '2025-01-20',
+    title: 'Celeritas Extra',
+    description: 'A comprehensive backport that includes Embeddium(Rubidium)Extra and various other features to Minecraft 1.12.2',
+    version: 'Latest',
+    date: '2025-12-23',
     category: 'Mod',
-    tags: ['Fabric', '1.20.1'],
-    downloadUrl: '#',
-    githubUrl: '#'
+    tags: ['Minecraft 1.12.2', 'Forge', 'Performance'],
+    downloadUrl: 'https://github.com/Sumire-Labs/Celeritas-Extra/releases',
+    githubUrl: 'https://github.com/Sumire-Labs/Celeritas-Extra'
+  },
+  {
+    id: '2',
+    title: 'JSwitcher',
+    description: '高速Java環境切り替えツール - 複数のJavaインストール間を瞬時に切り替える美しいCLIツール',
+    version: 'Latest',
+    date: '2025-12-23',
+    category: 'App',
+    tags: ['CLI', 'Java', 'Developer Tools'],
+    downloadUrl: 'https://github.com/Sumire-Labs/JSwitcher/releases',
+    githubUrl: 'https://github.com/Sumire-Labs/JSwitcher'
+  },
+  {
+    id: '3',
+    title: 'Tom\'s Vintage Storage',
+    description: 'Migrated Tom\'s Simple Storage to 1.12.2. Simple vanilla style storage mod for Minecraft',
+    version: 'Latest',
+    date: '2025-12-23',
+    category: 'Mod',
+    tags: ['Minecraft 1.12.2', 'Forge', 'Storage'],
+    downloadUrl: 'https://github.com/Sumire-Labs/Toms-Vintage-Storage/releases',
+    githubUrl: 'https://github.com/Sumire-Labs/Toms-Vintage-Storage'
   }
 ]
 
