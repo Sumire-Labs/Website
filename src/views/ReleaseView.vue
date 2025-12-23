@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-type Category = 'All' | 'App' | 'Mod' | 'ModPack'
+type Category = 'All' | 'Tool' | 'Mod' | 'ModPack'
 
 interface Release {
   id: string
@@ -19,7 +19,7 @@ interface Release {
 const activeCategory = ref<Category>('All')
 const searchQuery = ref('')
 
-const categories: Category[] = ['All', 'App', 'Mod', 'ModPack']
+const categories: Category[] = ['All', 'Tool', 'Mod', 'ModPack']
 
 const releases: Release[] = [
   {
@@ -39,7 +39,7 @@ const releases: Release[] = [
     description: '高速Java環境切り替えツール - 複数のJavaインストール間を瞬時に切り替える美しいCLIツール',
     version: 'Latest',
     date: '2025-12-23',
-    category: 'App',
+    category: 'Tool',
     tags: ['CLI', 'Java', 'Developer Tools'],
     downloadUrl: 'https://github.com/Sumire-Labs/JSwitcher/releases',
     githubUrl: 'https://github.com/Sumire-Labs/JSwitcher'
@@ -68,8 +68,8 @@ const filteredReleases = computed(() => {
 
 const getCategoryColor = (category: string) => {
   switch (category) {
-    case 'Software': return 'bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30'
-    case 'Minecraft Mod': return 'bg-green-500/15 text-green-600 dark:text-green-400 border-green-500/30'
+    case 'Tool': return 'bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30'
+    case 'Mod': return 'bg-green-500/15 text-green-600 dark:text-green-400 border-green-500/30'
     case 'Modpack': return 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30'
     default: return 'bg-gray-500/15 text-gray-600 dark:text-gray-400 border-gray-500/30'
   }
