@@ -29,7 +29,7 @@ const releases: Release[] = [
     version: 'Latest',
     date: '2025-12-23',
     category: 'Mod',
-    tags: ['Minecraft 1.12.2', 'Forge', 'Performance'],
+    tags: ['CleanroomLoader', '1.12.2', 'Performance'],
     downloadUrl: 'https://github.com/Sumire-Labs/Celeritas-Extra/releases',
     githubUrl: 'https://github.com/Sumire-Labs/Celeritas-Extra'
   },
@@ -51,7 +51,7 @@ const releases: Release[] = [
     version: 'Latest',
     date: '2025-12-23',
     category: 'Mod',
-    tags: ['Minecraft 1.12.2', 'Forge', 'Storage'],
+    tags: ['1.12.2', 'Forge', 'Storage'],
     downloadUrl: 'https://github.com/Sumire-Labs/Toms-Vintage-Storage/releases',
     githubUrl: 'https://github.com/Sumire-Labs/Toms-Vintage-Storage'
   }
