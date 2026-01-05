@@ -73,6 +73,7 @@ Wikiで使えるMarkdown記法の一覧です。
 ```
 
 **プレビュー:**
+[Google](https://google.com)
 <img src="/wiki/images/tokusui.png" width="128" alt="特水" />
 
 ---
