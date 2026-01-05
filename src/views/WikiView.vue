@@ -3,7 +3,7 @@ import { ref, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import MarkdownIt from 'markdown-it'
 // @ts-ignore
-import emoji from 'markdown-it-emoji'
+import { full as emoji } from 'markdown-it-emoji'
 // @ts-ignore
 import taskLists from 'markdown-it-task-lists'
 // @ts-ignore
