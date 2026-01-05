@@ -3,6 +3,7 @@
 すみれさばWikiへようこそ！
 ここでは、新しいページを追加する方法と、基本的なルールについて解説します。
 具体的なMarkdownの書き方については、[Markdownチートシート](/wiki/general/markdown-cheatsheet) をご覧ください。
+また、Markdownの練習には [砂場（練習ページ）](/wiki/general/sandbox) を利用できます。
 
 ## ページの追加方法
 
