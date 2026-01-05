@@ -68,8 +68,8 @@ Wikiで使えるMarkdown記法の一覧です。
 **書き方:**
 ```markdown
 [Google](https://google.com)
-![画像添付](/wiki/images/sample.png =100x100)
-![幅だけ指定](</wiki/images/sample.png =300x>)
+![画像添付](/wiki/images/sample.png)
+<img src="/wiki/images/sample.png" width="100" />
 ```
 
 **プレビュー:**

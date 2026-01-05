@@ -8,8 +8,6 @@ import { full as emoji } from 'markdown-it-emoji'
 import taskLists from 'markdown-it-task-lists'
 // @ts-ignore
 import GitHubAlerts from 'markdown-it-github-alerts'
-// @ts-ignore
-// import imsize from 'markdown-it-imsize'
 import hljs from 'highlight.js'
 
 import 'github-markdown-css/github-markdown.css'
@@ -17,8 +15,6 @@ import 'highlight.js/styles/github-dark.css'
 import 'markdown-it-github-alerts/styles/github-colors-light.css'
 import 'markdown-it-github-alerts/styles/github-colors-dark-class.css'
 import 'markdown-it-github-alerts/styles/github-base.css'
-
-console.log('WikiView: Script setup started')
 
 // Initialize markdown parser with GFM settings
 const md = new MarkdownIt({
@@ -40,18 +36,6 @@ const md = new MarkdownIt({
 md.use(emoji)
 md.use(taskLists)
 md.use(GitHubAlerts)
-
-// try {
-//   // @ts-ignore
-//   if (typeof imsize === 'function') {
-//     md.use(imsize)
-//   } else if (imsize && typeof imsize.default === 'function') {
-//      // Handle potential ESM default export wrap
-//     md.use(imsize.default)
-//   }
-// } catch (e) {
-//   console.warn('Failed to load markdown-it-imsize plugin:', e)
-// }
 
 // Add target="_blank" and rel="noopener noreferrer" to all links
 md.renderer.rules.link_open = (tokens, idx, options, _env, self) => {

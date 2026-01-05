@@ -48,12 +48,14 @@ public/
 ```
 
 **サイズ指定をする場合:**
-`=幅x高さ` または `=幅x` のように記述します。
+Markdownには標準でサイズ指定の機能がありません。
+サイズを変えたい場合は、HTMLタグを使います。
 
-```markdown
-![サイズ指定](/wiki/images/my-image.png =200x100)
-![幅のみ指定](/wiki/images/my-image.png =300x)
+```html
+<img src="/wiki/images/my-image.png" width="200" alt="サイズ指定" />
 ```
+
+※ `width="300"` のように幅だけ指定すれば、高さは自動で調整されます。
 
 *   パスは必ず `/wiki/images/` から始めてください。
 *   画像は自動的にレスポンシブ（スマホ対応）になり、角丸と影がつきます。
