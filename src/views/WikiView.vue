@@ -222,7 +222,7 @@ onMounted(async () => {
 
   // Load default page if no route params
   if (!route.params.category || !route.params.page) {
-    router.replace('/wiki/general/getting-started')
+    router.replace('/wiki/wikiguide/writing-guide')
   }
 })
 </script>
