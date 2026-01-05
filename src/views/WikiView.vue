@@ -38,7 +38,18 @@ const md = new MarkdownIt({
 md.use(emoji)
 md.use(taskLists)
 md.use(GitHubAlerts)
-md.use(imsize)
+
+try {
+  // @ts-ignore
+  if (typeof imsize === 'function') {
+    md.use(imsize)
+  } else if (imsize && typeof imsize.default === 'function') {
+     // Handle potential ESM default export wrap
+    md.use(imsize.default)
+  }
+} catch (e) {
+  console.warn('Failed to load markdown-it-imsize plugin:', e)
+}
 
 // Add target="_blank" and rel="noopener noreferrer" to all links
 md.renderer.rules.link_open = (tokens, idx, options, _env, self) => {
