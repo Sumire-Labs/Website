@@ -2,14 +2,39 @@
 import { ref, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import MarkdownIt from 'markdown-it'
+// @ts-ignore
+import emoji from 'markdown-it-emoji'
+// @ts-ignore
+import taskLists from 'markdown-it-task-lists'
+// @ts-ignore
+import GitHubAlerts from 'markdown-it-github-alerts'
+import hljs from 'highlight.js'
+import 'github-markdown-css/github-markdown.css'
+import 'highlight.js/styles/github-dark.css'
+import 'markdown-it-github-alerts/styles/github-colors-light.css'
+import 'markdown-it-github-alerts/styles/github-colors-dark.css'
+import 'markdown-it-github-alerts/styles/github-base.css'
 
-// Initialize markdown parser with security settings
+// Initialize markdown parser with GFM settings
 const md = new MarkdownIt({
   html: true,
   linkify: true,
   typographer: true,
-  breaks: false
+  breaks: false,
+  highlight: function (str: string, lang: string) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(str, { language: lang }).value
+      } catch (__) {}
+    }
+    return '' // use external default escaping
+  }
 })
+
+// Register Plugins
+md.use(emoji)
+md.use(taskLists)
+md.use(GitHubAlerts)
 
 // Add target="_blank" and rel="noopener noreferrer" to all links
 md.renderer.rules.link_open = (tokens, idx, options, _env, self) => {
@@ -304,7 +329,8 @@ onMounted(async () => {
             <!-- Content -->
             <div
               v-else
-              class="markdown-content prose dark:prose-invert max-w-none"
+              class="markdown-body"
+              style="background-color: transparent;"
               v-html="parseMarkdown(currentContent)"
             ></div>
           </article>
@@ -314,61 +340,13 @@ onMounted(async () => {
   </div>
 </template>
 
-<style scoped>
-.markdown-content :deep(h1) {
-  @apply text-3xl md:text-4xl font-bold mb-6 text-primary-light dark:text-primary-dark border-b-2 border-outline-light/20 dark:border-outline-dark/20 pb-3;
+/* GitHub Markdown CSS is imported in the script section */
+.markdown-body {
+  @apply text-on-surface-light dark:text-on-surface-dark;
 }
 
-.markdown-content :deep(h2) {
-  @apply text-2xl md:text-3xl font-semibold mb-4 mt-8 text-primary-light dark:text-primary-dark;
+/* Custom override for dark mode background transparency if needed */
+.dark .markdown-body {
+  color: #c9d1d9;
 }
 
-.markdown-content :deep(h3) {
-  @apply text-xl md:text-2xl font-semibold mb-3 mt-6;
-}
-
-.markdown-content :deep(p) {
-  @apply mb-4 leading-relaxed;
-}
-
-.markdown-content :deep(ul),
-.markdown-content :deep(ol) {
-  @apply mb-4 ml-6 space-y-2;
-}
-
-.markdown-content :deep(li) {
-  @apply leading-relaxed;
-}
-
-.markdown-content :deep(a) {
-  @apply text-primary-light dark:text-primary-dark underline hover:brightness-110 transition-all;
-}
-
-.markdown-content :deep(code) {
-  @apply bg-surface-light dark:bg-surface-dark px-2 py-1 rounded text-sm font-mono;
-}
-
-.markdown-content :deep(pre) {
-  @apply bg-surface-light dark:bg-surface-dark p-4 rounded-md3-sm overflow-x-auto mb-4;
-}
-
-.markdown-content :deep(pre code) {
-  @apply bg-transparent p-0;
-}
-
-.markdown-content :deep(blockquote) {
-  @apply border-l-4 border-primary-light dark:border-primary-dark pl-4 italic my-4;
-}
-
-.markdown-content :deep(strong) {
-  @apply font-bold;
-}
-
-.markdown-content :deep(em) {
-  @apply italic;
-}
-
-.markdown-content :deep(img) {
-  @apply max-w-full h-auto rounded-md3-md shadow-md3-2 mx-auto my-6;
-}
-</style>
