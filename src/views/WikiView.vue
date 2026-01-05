@@ -75,6 +75,7 @@ const categories = ref<WikiCategory[]>([])
 // Default category metadata (can be overridden by detection)
 const categoryDefaults: Record<string, { name: string; icon: string }> = {
   'flagpvp': { name: 'Flag PvP', icon: '' },
+  'wikiguide': { name: 'Wiki ガイド', icon: '' },
 
 }
 
