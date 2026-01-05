@@ -21,7 +21,7 @@ const md = new MarkdownIt({
   html: true,         // Enable HTML tags in source
   linkify: true,      // Auto-convert URLs to links
   typographer: true,  // Enable smart quotes and other typographic replacements
-  breaks: false,      // Disable auto line breaks (require 2 spaces or newline)
+  breaks: true,       // Enable auto line breaks (like GitHub comments)
   highlight: function (str: string, lang: string) {
     if (lang && hljs.getLanguage(lang)) {
       try {
