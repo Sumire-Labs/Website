@@ -3,23 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    /* Default color values - can be overridden by dynamic color system */
-    --dynamic-primary-light: #5865F2;
-    --dynamic-secondary-light: #8B5CF6;
+  :root {}
 
-    /* Smooth color transitions */
-    transition: --dynamic-primary-light 1000ms ease-in-out,
-                --dynamic-secondary-light 1000ms ease-in-out;
-  }
-
-  @supports not (transition: --dynamic-primary-light 1s) {
-    /* Fallback for browsers that don't support CSS custom property transitions */
-    :root {
-      --dynamic-primary-light: #5865F2;
-      --dynamic-secondary-light: #8B5CF6;
-    }
-  }
 
   * {
     @apply transition-colors duration-200;
@@ -37,6 +22,7 @@
 }
 
 @layer components {
+
   /* Material Design 3 Card with enhanced glassmorphism */
   .md3-card {
     @apply bg-surface-container-light/80 dark:bg-surface-container-dark/80;
@@ -185,6 +171,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -198,12 +185,10 @@
 
   /* Loading shimmer effect for skeleton screens */
   .shimmer {
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.1) 50%,
-      transparent 100%
-    );
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%);
     background-size: 200% 100%;
     animation: shimmer 2s infinite;
   }
@@ -212,6 +197,7 @@
     0% {
       background-position: -200% 0;
     }
+
     100% {
       background-position: 200% 0;
     }
@@ -263,6 +249,7 @@
 
   /* Performance optimization for animations */
   @media (prefers-reduced-motion: reduce) {
+
     .ripple-effect,
     .stagger-item,
     .shimmer,
@@ -274,6 +261,7 @@
 
   /* Disable backdrop-filter on low-end devices for performance */
   @media (max-width: 640px) {
+
     .md3-card,
     .glass-light,
     .glass-strong,
