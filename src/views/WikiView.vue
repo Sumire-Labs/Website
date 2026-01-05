@@ -49,9 +49,9 @@ const categories = ref<WikiCategory[]>([])
 
 // Default category metadata (can be overridden by detection)
 const categoryDefaults: Record<string, { name: string; icon: string }> = {
-  'general': { name: '一般', icon: '📚' },
-  'minecraft': { name: 'Minecraft', icon: '🎮' },
-  'app': { name: 'アプリ', icon: '📱' }
+  'general': { name: '一般', icon: '' },
+  'minecraft': { name: 'Minecraft', icon: '' },
+  'app': { name: 'アプリ', icon: '' }
 }
 
 const toggleSidebar = () => {
@@ -237,7 +237,7 @@ onMounted(async () => {
         >
           <div class="h-full overflow-y-auto bg-surface-container-light dark:bg-surface-container-dark rounded-md3-lg p-4 shadow-md3-1">
             <h2 class="text-xl font-bold mb-4 text-primary-light dark:text-primary-dark px-2">
-              📖 Wiki
+              すみれさばWiki
             </h2>
 
             <nav>
