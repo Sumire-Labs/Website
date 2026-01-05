@@ -8,7 +8,7 @@ const md = new MarkdownIt({
   html: true,
   linkify: true,
   typographer: true,
-  breaks: true
+  breaks: false
 })
 
 // Add target="_blank" and rel="noopener noreferrer" to all links
