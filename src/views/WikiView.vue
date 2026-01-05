@@ -347,7 +347,26 @@ onMounted(async () => {
   @apply text-on-surface-light dark:text-on-surface-dark;
 }
 
+/* Custom overrides to ensure list styles work with Tailwind Preflight */
+.markdown-body ul {
+  list-style-type: disc !important;
+  padding-left: 2em !important;
+}
+
+.markdown-body ol {
+  list-style-type: decimal !important;
+  padding-left: 2em !important;
+}
+
+.markdown-body li {
+  display: list-item !important; /* Force display list-item */
+}
+
 /* Custom override for dark mode background transparency if needed */
+.markdown-body {
+  background-color: transparent !important;
+}
+
 .dark .markdown-body {
   color: #c9d1d9;
 }
