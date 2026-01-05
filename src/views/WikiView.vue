@@ -5,10 +5,10 @@ import MarkdownIt from 'markdown-it'
 
 // Initialize markdown parser with security settings
 const md = new MarkdownIt({
-  html: false,
+  html: true,
   linkify: true,
   typographer: true,
-  breaks: false
+  breaks: true
 })
 
 // Add target="_blank" and rel="noopener noreferrer" to all links
@@ -366,5 +366,9 @@ onMounted(async () => {
 
 .markdown-content :deep(em) {
   @apply italic;
+}
+
+.markdown-content :deep(img) {
+  @apply max-w-full h-auto rounded-md3-md shadow-md3-2 mx-auto my-6;
 }
 </style>
