@@ -26,8 +26,8 @@ const releases: Release[] = [
     id: '1',
     title: 'Celeritas Extra',
     description: 'A comprehensive backport that includes Embeddium(Rubidium)Extra and various other features to Minecraft 1.12.2',
-    version: 'Latest',
-    date: '2025-12-23',
+    version: '0.1.14',
+    date: '2026-01-05',
     category: 'Mod',
     tags: ['CleanroomLoader', '1.12.2', 'Performance'],
     downloadUrl: 'https://github.com/Sumire-Labs/Celeritas-Extra/releases',
@@ -37,8 +37,8 @@ const releases: Release[] = [
     id: '2',
     title: 'JSwitcher',
     description: '高速Java環境切り替えツール - 複数のJavaインストール間を瞬時に切り替える美しいCLIツール',
-    version: 'Latest',
-    date: '2025-12-23',
+    version: '0.3.1',
+    date: '2025-10-06',
     category: 'Tool',
     tags: ['CLI', 'Java', 'Developer Tools'],
     downloadUrl: 'https://github.com/Sumire-Labs/JSwitcher/releases',
@@ -48,12 +48,23 @@ const releases: Release[] = [
     id: '3',
     title: 'Tom\'s Vintage Storage',
     description: 'Migrated Tom\'s Simple Storage to 1.12.2. Simple vanilla style storage mod for Minecraft',
-    version: 'Latest',
+    version: '0.1.0-alpha',
     date: '2025-12-23',
     category: 'Mod',
     tags: ['1.12.2', 'Forge', 'Storage'],
     downloadUrl: 'https://github.com/Sumire-Labs/Toms-Vintage-Storage/releases',
     githubUrl: 'https://github.com/Sumire-Labs/Toms-Vintage-Storage'
+  },
+  {
+    id: '4',
+    title: 'FlagPvP ResourcePacks',
+    description: 'FlagPvP ResourcePacks',
+    version: '3.0',
+    date: '2026-01-06',
+    category: 'Mod',
+    tags: ['1.21.10', 'Fabric', 'ResourcePacks'],
+    downloadUrl: '',
+    githubUrl: ''
   }
 ]
 
