@@ -49,9 +49,8 @@ const categories = ref<WikiCategory[]>([])
 
 // Default category metadata (can be overridden by detection)
 const categoryDefaults: Record<string, { name: string; icon: string }> = {
-  'general': { name: '一般', icon: '' },
-  'minecraft': { name: 'Minecraft', icon: '' },
-  'app': { name: 'アプリ', icon: '' }
+  'flagpvp': { name: 'Flag PvP', icon: '' },
+
 }
 
 const toggleSidebar = () => {
