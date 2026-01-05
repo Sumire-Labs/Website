@@ -2,8 +2,7 @@
 
 すみれさばWikiへようこそ！
 ここでは、新しいページを追加する方法と、基本的なルールについて解説します。
-具体的なMarkdownの書き方については、[Markdownチートシート](/wiki/general/markdown-cheatsheet) をご覧ください。
-また、Markdownの練習には [砂場（練習ページ）](/wiki/general/sandbox) を利用できます。
+具体的なMarkdownの書き方については、[Markdownチートシート](/wiki/wikiguide/markdown-cheatsheet) をご覧ください。
 
 ## ページの追加方法
 
@@ -27,16 +26,29 @@ docs/
 
 ## 画像の使い方
 
-画像をWikiに貼りたい場合は、以下の手順で行います。
+Wikiに画像を貼る手順は以下の通りです。
 
-1. 画像を `public/wiki/images/` フォルダに保存します。
-2. Markdownで以下のように記述します。
+### 1. 画像ファイルを配置する
+プロジェクト内の **`public/wiki/images/`** フォルダに画像ファイルを置いてください。
 
-```markdown
-![画像の説明](/wiki/images/ファイル名.png)
+```text
+public/
+  wiki/
+    images/
+      my-image.png   <-- ここに置く
 ```
 
-Wiki内の画像は自動的にスマホ対応（画面幅に合わせて縮小）され、角丸・影付きで表示されます。
+※ もしフォルダがない場合は作成してください。
+
+### 2. Markdownで表示する
+以下のように書くと表示されます。
+
+```markdown
+![画像の説明](/wiki/images/my-image.png)
+```
+
+*   パスは必ず `/wiki/images/` から始めてください。
+*   画像は自動的にレスポンシブ（スマホ対応）になり、角丸と影がつきます。
 
 ---
 
