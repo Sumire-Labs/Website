@@ -304,7 +304,7 @@ onMounted(async () => {
                         :class="[
                           'w-full text-left px-3 py-2 rounded-md3-sm text-sm transition-colors',
                           currentPage?.id === page.id && currentPage?.category === category.id
-                            ? 'bg-primary-light/10 dark:bg-primary-dark/10 text-primary-light dark:text-primary-dark font-medium'
+                            ? 'bg-primary-light/10 dark:bg-primary-dark/10 text-primary-light dark:text-primary-dark'
                             : 'text-on-surface-variant-light dark:text-on-surface-variant-dark hover:bg-surface-container-high-light dark:hover:bg-surface-container-high-dark'
                         ]"
                       >
