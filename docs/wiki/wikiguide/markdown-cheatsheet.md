@@ -68,11 +68,12 @@ Wikiで使えるMarkdown記法の一覧です。
 **書き方:**
 ```markdown
 [Google](https://google.com)
-![画像の説明](/wiki/images/sample.png)
+![画像添付](/wiki/images/sample.png =100x100)
+![幅だけ指定](</wiki/images/sample.png =300x>)
 ```
 
 **プレビュー:**
-![特水](/wiki/images/tokusui.png)
+![特水](/wiki/images/tokusui.png =128x)
 
 ---
 

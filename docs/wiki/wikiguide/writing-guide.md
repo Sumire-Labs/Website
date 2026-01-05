@@ -47,6 +47,14 @@ public/
 ![画像の説明](/wiki/images/my-image.png)
 ```
 
+**サイズ指定をする場合:**
+`=幅x高さ` または `=幅x` のように記述します。
+
+```markdown
+![サイズ指定](/wiki/images/my-image.png =200x100)
+![幅のみ指定](/wiki/images/my-image.png =300x)
+```
+
 *   パスは必ず `/wiki/images/` から始めてください。
 *   画像は自動的にレスポンシブ（スマホ対応）になり、角丸と影がつきます。
 

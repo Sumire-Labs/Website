@@ -8,7 +8,10 @@ import { full as emoji } from 'markdown-it-emoji'
 import taskLists from 'markdown-it-task-lists'
 // @ts-ignore
 import GitHubAlerts from 'markdown-it-github-alerts'
+// @ts-ignore
+import imsize from 'markdown-it-imsize'
 import hljs from 'highlight.js'
+
 import 'github-markdown-css/github-markdown.css'
 import 'highlight.js/styles/github-dark.css'
 import 'markdown-it-github-alerts/styles/github-colors-light.css'
@@ -17,10 +20,10 @@ import 'markdown-it-github-alerts/styles/github-base.css'
 
 // Initialize markdown parser with GFM settings
 const md = new MarkdownIt({
-  html: true,
-  linkify: true,
-  typographer: true,
-  breaks: false,
+  html: true,         // Enable HTML tags in source
+  linkify: true,      // Auto-convert URLs to links
+  typographer: true,  // Enable smart quotes and other typographic replacements
+  breaks: false,      // Disable auto line breaks (require 2 spaces or newline)
   highlight: function (str: string, lang: string) {
     if (lang && hljs.getLanguage(lang)) {
       try {
@@ -35,6 +38,7 @@ const md = new MarkdownIt({
 md.use(emoji)
 md.use(taskLists)
 md.use(GitHubAlerts)
+md.use(imsize)
 
 // Add target="_blank" and rel="noopener noreferrer" to all links
 md.renderer.rules.link_open = (tokens, idx, options, _env, self) => {
