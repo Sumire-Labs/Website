@@ -249,7 +249,7 @@ onUnmounted(() => {
     <section class="py-16 md:py-24 border-t border-outline-light/20 dark:border-outline-dark/20">
       <div class="w-full px-4 sm:px-6 lg:px-12 xl:px-16">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-light dark:text-primary-dark">
-          📢 お知らせ
+          お知らせ
         </h2>
 
         <!-- ローディング - Skeleton cards -->
