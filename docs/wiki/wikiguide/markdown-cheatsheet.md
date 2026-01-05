@@ -72,8 +72,7 @@ Wikiで使えるMarkdown記法の一覧です。
 ```
 
 **プレビュー:**
-[特水](/wiki/images/tokusui.png)
-(画像が表示されます)
+![特水](/wiki/images/tokusui.png)
 
 ---
 
