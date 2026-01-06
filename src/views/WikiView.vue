@@ -77,6 +77,7 @@ const categories = ref<WikiCategory[]>([])
 const categoryDefaults: Record<string, { name: string; icon: string }> = {
   'flagpvp': { name: 'Flag PvP', icon: '' },
   'wikiguide': { name: 'Wiki ガイド', icon: '' },
+  'profile': { name: 'Wiki ガイド', : '' },
 
 }
 
