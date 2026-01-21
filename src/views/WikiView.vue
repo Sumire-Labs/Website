@@ -78,6 +78,7 @@ const categoryDefaults: Record<string, { name: string; icon: string }> = {
   'flagpvp': { name: 'Flag PvP', icon: '' },
   'wikiguide': { name: 'Wiki ガイド', icon: '' },
   'profile': { name: '参加者資料', icon: '' },
+  'ppc': { name: 'Pepe`s Config Language', icon: '' },
 
 }
 
