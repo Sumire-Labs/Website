@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
+
+export const metadata: Metadata = {
+  title: "すみれさば | Discord Server",
+  description: "すみれさば - 身内主導の小規模Discordコミュニティサーバー",
+  openGraph: {
+    images: ["/images/og/home.png"],
+  },
+};
 
 const DISCORD_INVITE_URL = "https://discord.gg/H8eh2hR79e";
 

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import {
   getOrganization,
@@ -6,6 +7,16 @@ import {
 } from "@/lib/github";
 import { RepoCard } from "@/components/lab/RepoCard";
 import { ActivityItem } from "@/components/lab/ActivityItem";
+
+export const metadata: Metadata = {
+  title: "Lab",
+  description: "Sumire-Labsの開発プロジェクト一覧",
+  openGraph: {
+    title: "Lab | すみれさば",
+    description: "Sumire-Labsの開発プロジェクト一覧",
+    images: ["/images/og/lab.png"],
+  },
+};
 
 const members = [
   { name: "Hag/Gha", image: "/images/members/hag.png" },

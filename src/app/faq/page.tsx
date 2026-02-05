@@ -1,5 +1,16 @@
+import type { Metadata } from "next";
 import { Accordion, AccordionItem } from "@/components/ui/Accordion";
 import { SocialLinks } from "@/components/ui/SocialLinks";
+
+export const metadata: Metadata = {
+  title: "FAQ",
+  description: "すみれさばに関するよくある質問と回答",
+  openGraph: {
+    title: "FAQ | すみれさば",
+    description: "すみれさばに関するよくある質問と回答",
+    images: ["/images/og/faq.png"],
+  },
+};
 
 const faqs = [
   {
