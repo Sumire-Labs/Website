@@ -16,48 +16,137 @@ export function DynamicIsland() {
   const navRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
-  const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0, opacity: 0 });
+  const [currentPos, setCurrentPos] = useState({ left: 0, width: 0 });
+  const [targetPos, setTargetPos] = useState({ left: 0, width: 0 });
+  const [opacity, setOpacity] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
-  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const [isOnButton, setIsOnButton] = useState(false);
+  const animationRef = useRef<number | null>(null);
 
   const activeIndex = navItems.findIndex((item) => item.href === pathname);
 
-  const updateSlider = useCallback((index: number) => {
-    const item = itemRefs.current[index];
-    const nav = navRef.current;
-    if (item && nav) {
-      const navRect = nav.getBoundingClientRect();
-      const itemRect = item.getBoundingClientRect();
-      setSliderStyle({
-        left: itemRect.left - navRect.left,
-        width: itemRect.width,
-        opacity: 1,
-      });
-    }
+  // ボタンの位置情報を取得
+  const getItemPositions = useCallback(() => {
+    return itemRefs.current.map((item) => {
+      if (!item) return { left: 0, width: 0, center: 0, right: 0 };
+      const left = item.offsetLeft;
+      const width = item.offsetWidth;
+      return {
+        left,
+        width,
+        center: left + width / 2,
+        right: left + width,
+      };
+    });
   }, []);
 
-  useEffect(() => {
-    if (activeIndex >= 0 && !isHovering) {
-      updateSlider(activeIndex);
+  // アクティブなボタンの位置を取得
+  const getActivePosition = useCallback(() => {
+    const positions = getItemPositions();
+    if (activeIndex >= 0 && positions[activeIndex]) {
+      return positions[activeIndex];
     }
-  }, [activeIndex, isHovering, updateSlider]);
+    return null;
+  }, [activeIndex, getItemPositions]);
 
+  // 初期化
   useEffect(() => {
-    if (isHovering && hoverIndex !== null) {
-      updateSlider(hoverIndex);
-    } else if (activeIndex >= 0) {
-      updateSlider(activeIndex);
+    const pos = getActivePosition();
+    if (pos) {
+      setCurrentPos({ left: pos.left, width: pos.width });
+      setTargetPos({ left: pos.left, width: pos.width });
+      setOpacity(1);
     }
-  }, [isHovering, hoverIndex, activeIndex, updateSlider]);
+  }, [getActivePosition]);
 
-  const handleMouseEnter = (index: number) => {
+  // マウス位置に基づいてターゲット位置を更新
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    const nav = navRef.current;
+    if (!nav) return;
+
+    const navRect = nav.getBoundingClientRect();
+    const mouseX = e.clientX - navRect.left;
+    const positions = getItemPositions();
+
+    if (positions.length === 0) return;
+
+    const avgWidth = positions.reduce((sum, p) => sum + p.width, 0) / positions.length;
+    const firstPos = positions[0];
+    const lastPos = positions[positions.length - 1];
+    const minLeft = firstPos.left;
+    const maxLeft = lastPos.right - avgWidth;
+
+    // マウス位置ベースの基本位置
+    let baseLeft = mouseX - avgWidth / 2;
+    baseLeft = Math.max(minLeft, Math.min(maxLeft, baseLeft));
+
+    // ボタンの上にいるかチェック
+    let onButton = false;
+    let buttonPos = null;
+    for (const pos of positions) {
+      if (mouseX >= pos.left && mouseX <= pos.right) {
+        onButton = true;
+        buttonPos = pos;
+        break;
+      }
+    }
+
+    setIsOnButton(onButton);
+
+    if (onButton && buttonPos) {
+      // ボタンの上にいる場合はボタン位置に合わせる（位置は正確に、遷移は滑らかに）
+      setTargetPos({ left: buttonPos.left, width: buttonPos.width });
+    } else {
+      // ボタン間にいる場合はマウスに追従
+      setTargetPos({ left: baseLeft, width: avgWidth });
+    }
+  }, [getItemPositions]);
+
+  // スムーズアニメーション（lerp）- より滑らかに
+  useEffect(() => {
+    const animate = () => {
+      setCurrentPos((prev) => {
+        // ホバー中はより追従、離れたらゆっくり戻る
+        const lerpFactor = isHovering ? 0.15 : 0.1;
+
+        const diffLeft = targetPos.left - prev.left;
+        const diffWidth = targetPos.width - prev.width;
+
+        // 差が小さければそのまま
+        if (Math.abs(diffLeft) < 0.1 && Math.abs(diffWidth) < 0.1) {
+          return { left: targetPos.left, width: targetPos.width };
+        }
+
+        return {
+          left: prev.left + diffLeft * lerpFactor,
+          width: prev.width + diffWidth * lerpFactor,
+        };
+      });
+
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animationRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isHovering, targetPos]);
+
+  const handleMouseEnter = () => {
     setIsHovering(true);
-    setHoverIndex(index);
   };
 
   const handleMouseLeave = () => {
     setIsHovering(false);
-    setHoverIndex(null);
+    setIsOnButton(false);
+    // アクティブなボタンに戻る
+    const pos = getActivePosition();
+    if (pos) {
+      setTargetPos({ left: pos.left, width: pos.width });
+    }
   };
 
   return (
@@ -81,15 +170,22 @@ export function DynamicIsland() {
         <div className="w-px h-4 bg-white/20 mx-1" />
 
         {/* Navigation Links with Sliding Indicator */}
-        <div ref={navRef} className="relative flex items-center gap-0.5">
+        <div
+          ref={navRef}
+          className="relative flex items-center gap-0.5"
+          onMouseEnter={handleMouseEnter}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        >
           {/* Sliding Background Indicator */}
           <div
-            className="absolute top-0 h-full rounded-full bg-white/20 transition-all duration-300 ease-out"
+            className="absolute top-0 h-full rounded-full bg-white/20 pointer-events-none"
             style={{
-              left: sliderStyle.left,
-              width: sliderStyle.width,
-              opacity: sliderStyle.opacity,
-              transform: isHovering ? 'scale(1.02)' : 'scale(1)',
+              left: currentPos.left,
+              width: currentPos.width,
+              opacity: opacity,
+              transform: isOnButton ? 'scale(1.03)' : isHovering ? 'scale(1.01)' : 'scale(1)',
+              transition: 'transform 0.2s ease-out, opacity 0.3s ease-out',
             }}
           />
 
@@ -100,11 +196,9 @@ export function DynamicIsland() {
                 key={item.href}
                 href={item.href}
                 ref={(el) => { itemRefs.current[index] = el; }}
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={handleMouseLeave}
                 className={`
                   relative z-10 px-4 py-1.5 rounded-full text-sm font-medium
-                  transition-all duration-200 ease-out
+                  transition-colors duration-200 ease-out
                   active:scale-95
                   ${isActive ? "text-white" : "text-white/70 hover:text-white"}
                 `}
