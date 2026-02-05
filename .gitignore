@@ -37,8 +37,9 @@ yarn-error.log*
 next-env.d.ts
 
 # Local
-.claude 
+.claude
 CLAUDE.node_modules
 tmpclaude-*
 nul
 claude.md
+CLAUDE.md
