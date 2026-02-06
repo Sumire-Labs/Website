@@ -155,19 +155,20 @@ export function DynamicIsland() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 px-2 py-1 rounded-full"
+          className="flex items-center gap-2 px-2 py-1 rounded-full flex-shrink-0"
         >
           <Image
             src="/images/icon.png"
             alt="すみれさば"
             width={28}
             height={28}
-            className="rounded-full"
+            className="rounded-full w-7 h-7 min-w-[28px] min-h-[28px]"
+            priority
           />
         </Link>
 
         {/* Divider */}
-        <div className="w-px h-4 bg-white/20 mx-1" />
+        <div className="w-px h-4 bg-white/20 mx-1 flex-shrink-0" />
 
         {/* Navigation Links with Sliding Indicator */}
         <div
