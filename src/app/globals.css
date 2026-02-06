@@ -70,15 +70,21 @@ body {
 
 /* iOS 26 Liquid Glass Card */
 .glass-card {
-  background: var(--bg-glass);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  background: rgba(30, 30, 30, 0.9);
   border: 1px solid var(--border-glass);
   border-radius: 28px;
   box-shadow:
     var(--shadow-glass),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@supports (backdrop-filter: blur(40px)) or (-webkit-backdrop-filter: blur(40px)) {
+  .glass-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+  }
 }
 
 .glass-card:hover {
@@ -91,10 +97,8 @@ body {
 
 /* Dynamic Island Header - iOS Style */
 .dynamic-island {
-  background: var(--island-bg);
+  background: rgba(40, 40, 40, 0.95);
   border-radius: 9999px;
-  backdrop-filter: blur(50px) saturate(200%);
-  -webkit-backdrop-filter: blur(50px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow:
     0 4px 24px rgba(0, 0, 0, 0.15),
@@ -102,12 +106,26 @@ body {
   transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+@supports (backdrop-filter: blur(50px)) or (-webkit-backdrop-filter: blur(50px)) {
+  .dynamic-island {
+    background: var(--island-bg);
+    backdrop-filter: blur(50px) saturate(200%);
+    -webkit-backdrop-filter: blur(50px) saturate(200%);
+  }
+}
+
 .dynamic-island:hover {
   scale: 1.03;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(60, 60, 60, 0.95);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.25),
     inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+@supports (backdrop-filter: blur(50px)) or (-webkit-backdrop-filter: blur(50px)) {
+  .dynamic-island:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
 }
 
 /* Navigation Slider - iOS 26 Spring Animation */
@@ -121,9 +139,7 @@ body {
 
 /* iOS 26 Liquid Glass Button */
 .btn-primary {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  background: rgba(60, 60, 60, 0.95);
   color: var(--foreground);
   padding: 16px 36px;
   border-radius: 980px;
@@ -138,6 +154,14 @@ body {
     inset 0 1px 1px rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
+}
+
+@supports (backdrop-filter: blur(40px)) or (-webkit-backdrop-filter: blur(40px)) {
+  .btn-primary {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+  }
 }
 
 .btn-primary::before {
@@ -172,9 +196,7 @@ body {
 
 /* Secondary Glass Button */
 .btn-glass {
-  background: var(--bg-glass);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  background: rgba(40, 40, 40, 0.95);
   color: var(--foreground);
   padding: 16px 36px;
   border-radius: 980px;
@@ -187,6 +209,14 @@ body {
   box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.15),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+@supports (backdrop-filter: blur(40px)) or (-webkit-backdrop-filter: blur(40px)) {
+  .btn-glass {
+    background: var(--bg-glass);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+  }
 }
 
 .btn-glass:hover {
